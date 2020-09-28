@@ -18,5 +18,6 @@ from example import get_hotp
     ]
 )
 def test_get_hotp(secret_bytes, counter, expected):
+    # Refer to https://tools.ietf.org/html/rfc4226
     actual = get_hotp(secret_bytes, counter)
     assert actual == expected
