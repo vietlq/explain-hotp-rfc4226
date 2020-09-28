@@ -4,7 +4,7 @@ import struct
 from binascii import hexlify, unhexlify
 
 
-def get_hotp(secret_bytes: bytes, counter: int) -> int:
+def get_hotp_impl(secret_bytes: bytes, counter: int) -> int:
     hmac_obj = hmac.new(secret_bytes, digestmod=hashlib.sha1)
 
     counter_raw = struct.pack(">Q", counter)
@@ -18,6 +18,11 @@ def get_hotp(secret_bytes: bytes, counter: int) -> int:
 
     htop_value = last_31bits % 10**6
     return htop_value
+
+
+def get_hotp(secret_bytes: bytes, counter: int) -> str:
+    htop_value = get_hotp_impl(secret_bytes, counter)
+    return f"{htop_value:06d}"
 
 
 if __name__ == "__main__":
