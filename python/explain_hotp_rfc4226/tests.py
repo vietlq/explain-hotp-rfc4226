@@ -1,5 +1,5 @@
 import pytest
-from .example import get_hotp
+from example import get_hotp
 
 
 @pytest.mark.parametrize("secret_bytes,counter,expected",
