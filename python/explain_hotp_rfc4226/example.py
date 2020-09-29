@@ -17,17 +17,17 @@ def get_hotp_impl(secret_bytes: bytes, counter: int) -> int:
     truncated = digest_res[offset : offset + 4]
     last_31bits = int(hexlify(truncated), 16) & 0x7FFFFFFF
 
-    htop_value = last_31bits % 10 ** 6
-    return htop_value
+    hotp_value = last_31bits % 10 ** 6
+    return hotp_value
 
 
 def get_hotp(secret_bytes: bytes, counter: int) -> str:
-    htop_value = get_hotp_impl(secret_bytes, counter)
-    return f"{htop_value:06d}"
+    hotp_value = get_hotp_impl(secret_bytes, counter)
+    return f"{hotp_value:06d}"
 
 
 if __name__ == "__main__":
     secret_bytes = b"12345678901234567890"
 
     for counter in range(10):
-        print(f"The HTOP value of the counter {counter}: {get_hotp(secret_bytes, counter)}")
+        print(f"The HOTP value of the counter {counter}: {get_hotp(secret_bytes, counter)}")
