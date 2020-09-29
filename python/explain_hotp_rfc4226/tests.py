@@ -2,7 +2,8 @@ import pytest
 from example import get_hotp
 
 
-@pytest.mark.parametrize("secret_bytes,counter,expected",
+@pytest.mark.parametrize(
+    "secret_bytes,counter,expected",
     [
         (b"12345678901234567890", 0, "755224"),
         (b"12345678901234567890", 1, "287082"),
@@ -15,7 +16,7 @@ from example import get_hotp
         (b"12345678901234567890", 8, "399871"),
         (b"12345678901234567890", 9, "520489"),
         (b"12345678901234567890", 30, "026920"),
-    ]
+    ],
 )
 def test_get_hotp(secret_bytes, counter, expected):
     # Refer to https://tools.ietf.org/html/rfc4226

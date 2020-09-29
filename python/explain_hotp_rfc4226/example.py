@@ -14,10 +14,10 @@ def get_hotp_impl(secret_bytes: bytes, counter: int) -> int:
 
     digest_res = hmac_obj.digest()
     offset = digest_res[-1] % 16
-    truncated = digest_res[offset: offset + 4]
-    last_31bits = int(hexlify(truncated), 16) & 0x7fffffff
+    truncated = digest_res[offset : offset + 4]
+    last_31bits = int(hexlify(truncated), 16) & 0x7FFFFFFF
 
-    htop_value = last_31bits % 10**6
+    htop_value = last_31bits % 10 ** 6
     return htop_value
 
 
